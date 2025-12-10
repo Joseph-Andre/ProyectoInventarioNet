@@ -1,3 +1,10 @@
 <Solution>
+  <Folder Name="/docs/" />
+  <Folder Name="/src/">
+    <Project Path="LinqAdvancedLab.Console/LinqAdvancedLab.Console.csproj" Id="210e1181-75be-46d9-a9ca-ad12f3f7b3e5" />
+    <Project Path="LinqAdvancedLab.Data/LinqAdvancedLab.Data.csproj" Id="a9a945c3-60df-483d-9c6a-20b66e6d6346" />
+    <Project Path="LinqAdvancedLab.Domain/LinqAdvancedLab.Domain.csproj" Id="5766d297-39e0-43c3-9e35-172304118774" />
+  </Folder>
+  <Folder Name="/test/" />
   <Project Path="ProyectoInventarioNet/ProyectoInventarioNet.csproj" />
 </Solution>
