@@ -1,18 +1,24 @@
 ﻿using LinqAdvancedLab.Console;
 using LinqAdvancedLab.Data.Models;
+using LinqAdvancedLab.Data.Repositories;
+using LinqAdvancedLab.Domain.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-
 
 var host = Host.CreateDefaultBuilder(args)
     .ConfigureServices((context, services) =>
     {
         services.AddDbContext<NorthwindContext>(options =>
             options.UseSqlServer(context.Configuration.GetConnectionString("Northwind")));
+
+        // ✅ Registrar repositorio genérico
+        services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+
         services.AddTransient<QueryRunner>();
-        services.AddTransient<AdvancedQueryRunner>(); // 👈 Nuevo
+        services.AddTransient<AdvancedQueryRunner>();
+        services.AddTransient<SpecificationQueryRunner>(); // 👈 Nuevo
     })
     .Build();
 
@@ -31,6 +37,11 @@ await basicRunner.RunAsync();
 System.Console.WriteLine("\n🔹 Ejecutando Queries 5-8 (Avanzadas)...\n");
 var advancedRunner = scope.ServiceProvider.GetRequiredService<AdvancedQueryRunner>();
 await advancedRunner.RunAsync();
+
+// ✅ Ejecutar demostración de Specification Pattern
+System.Console.WriteLine("\n🔹 Ejecutando Specification Pattern (Refactor)...\n");
+var specRunner = scope.ServiceProvider.GetRequiredService<SpecificationQueryRunner>();
+await specRunner.RunAsync();
 
 System.Console.WriteLine("\n✅ Todas las queries ejecutadas exitosamente!");
 System.Console.WriteLine("\n📁 Archivos generados:");
