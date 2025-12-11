@@ -8,6 +8,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\LinqAdvancedLab.Data\LinqAdvancedLab.Data.csproj" />
+	  <ProjectReference Include="..\LinqAdvancedLab.Domain\LinqAdvancedLab.Domain.csproj" />
+
   </ItemGroup>
 
   <ItemGroup>

@@ -4,10 +4,12 @@ using System.Text;
 
 namespace LinqAdvancedLab.Domain.DTOs;
 
-public record CustomerDTO(
-    string CustomerId,
+// DTO para Union de Customers y Suppliers
+public record ContactInfoDTO(
+    string Id,
     string CompanyName,
     string? ContactName,
     string? City,
-    string? Country
+    string? Country,
+    string ContactType // "Customer" o "Supplier"
 );
