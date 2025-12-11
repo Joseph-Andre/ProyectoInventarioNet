@@ -23,53 +23,98 @@
 -Consultas básicas (Queries 1–4): 2 h
 -Total: 4 h
 
-# Diario de Aprendizaje – <Joseph> – Semana <11/12/2025>
-## 1. Objetivos del día
-- [X] Crear la rama feature/queries5-8.
-- [X] Implementar Query 5 (paginación básica con Skip/Take).
-- [X] Implementar Query 6 (paginación avanzada con PagedResult).
-- [X] Implementar Query 7 (Union/Concat de Customers y Suppliers).
-- [X] Implementar Query 8 (expresiones compiladas con EF.CompileQuery).
-- [X] Generar SQL documentado en docs/queries_5_to_8.sql.
-- [X] Crear la Pull Request hacia develop.
 
-## 2. Lo que logré
-- **Creación de rama**: Creé la rama `feature/queries5-8` desde `develop` para trabajar las consultas avanzadas.
-- **Query 5 (Paginación básica)**: Implementé paginación con `Skip()` y `Take()`, el SQL genera `OFFSET-FETCH` correctamente.
-- **Query 6 (Paginación avanzada)**: Creé el DTO `PagedResult<T>` con metadata completa (TotalPages, HasPreviousPage, HasNextPage), útil para interfaces de usuario con paginación.
-- **Query 7 (Union/Concat)**: Combiné Customers y Suppliers en un DTO unificado `ContactInfoDTO` usando `Concat()` en memoria (aprendí que EF Core no puede traducir `Union` después de proyecciones complejas).
-- **Query 8 (Expresiones compiladas)**: Implementé `EF.CompileQuery()` para cachear planes de ejecución. Tuve que corregir un error donde `.Take()` debe estar dentro de la expresión compilada, no después.
-- **Archivos creados**:
-  - `AdvancedQueryRunner.cs` (maneja queries 5-8 separadas de las básicas)
-  - `PagedResult.cs`, `ContactInfoDTO.cs`, `OrderDTO.cs`, `EmployeeDTO.cs`, `CustomerDTO.cs`
-  - `docs/queries_5_to_8.sql` con SQL generado y documentado
-- **Commit realizado**: `feat: queries 5-8 (paginación, union, compiled queries)`
-- **Push y PR**: Abrí Pull Request hacia `develop` y actualicé el tablero del proyecto.
+# Diario de Aprendizaje – <Joseph> – Semana <11/12/2025> (continuación)
+## 1. Objetivos del día (Punto 2)
+- [X] Crear rama feature/repository-specification.
+- [X] Diseñar interfaces `ISpecification<T>` e `IRepository<T>` en Domain.
+- [X] Implementar `BaseSpecification<T>` con métodos fluent.
+- [X] Implementar `Repository<T>` genérico en Data con EF Core.
+- [X] Crear `SpecificationEvaluator<T>` para traducir specs a IQueryable.
+- [X] Implementar 7 specifications concretas (5 Products, 2 Orders).
+- [X] Crear `SpecificationQueryRunner.cs` para demostrar el patrón.
+- [X] Registrar repositorio genérico en DI (Program.cs).
+- [X] Ejecutar y validar funcionamiento completo.
 
-## 3. Dificultades
-- **Error en Query 7 (Union)**: EF Core no puede traducir `.Union()` después de proyectar a DTOs complejos. **Solución**: Ejecutar queries por separado con `.ToListAsync()` y usar `.Concat()` en memoria.
-- **Error en Query 8 (Expresiones compiladas)**: Intenté aplicar `.Take()` después de ejecutar la query compilada, pero el tipo de retorno (`IEnumerable<Product>`) no era compatible con `.OrderByDescending()`. **Solución**: Mover `.Take()` dentro de la expresión compilada y agregar el parámetro `int take` al `Func<>`.
-- **Referencia de proyecto faltante**: El proyecto `LinqAdvancedLab.Console` no tenía referencia a `LinqAdvancedLab.Domain`, causando errores de compilación. **Solución**: Agregué `<ProjectReference Include="..\LinqAdvancedLab.Domain\LinqAdvancedLab.Domain.csproj" />` al `.csproj`.
-- **Archivo queries_5_to_8.sql no se generaba**: El programa se detenía por el error en Query 8 antes de llegar al código de guardado. Después de corregir Query 8, el archivo se generó correctamente.
+## 2. Lo que logré (Punto 2)
+- **Arquitectura implementada**:
+  - **Domain** (interfaces puras, sin dependencias):
+    - `ISpecification<T>`: Contrato con Criteria, Includes, OrderBy, Paging
+    - `BaseSpecification<T>`: Implementación base con métodos fluent
+    - `IRepository<T>`: Contrato del repositorio genérico
+  - **Data** (implementaciones + specifications concretas):
+    - `Repository<T>`: Implementación genérica usando `NorthwindContext`
+    - `SpecificationEvaluator<T>`: Traduce specs a IQueryable (WHERE → ORDER BY → INCLUDE → PAGING)
+    - **Specifications Products** (5):
+      - `ProductsWithCategorySpecification`: Eager loading con Include
+      - `ExpensiveProductsSpecification`: Filtro por precio + paginación
+      - `ProductsPaginatedSpecification`: Paginación genérica
+      - `DiscontinuedProductsSpecification`: Productos descontinuados
+      - `ProductsByCategorySpecification`: Filtro por categoría con Include
+    - **Specifications Orders** (2):
+      - `OrdersWithDetailsSpecification`: Múltiples Includes (Customer, Employee, OrderDetails)
+      - `RecentOrdersSpecification`: Filtro por fecha + paginación
+  - **Console**:
+    - `SpecificationQueryRunner.cs`: Demostración de 7 casos de uso con salida en consola
+- **Registro en DI**: `services.AddScoped(typeof(IRepository<>), typeof(Repository<>))`
+- **Ejecución exitosa**: 
+  - 77 productos con categoría (LEFT JOIN)
+  - 7 productos caros paginados (WHERE + ORDER BY DESC + OFFSET-FETCH)
+  - 10 productos paginados (página 2)
+  - 8 productos descontinuados
+  - 12 productos en categoría Beverages
+  - 830 órdenes con 3 includes (Customer, Employee, OrderDetails)
+  - 0 órdenes recientes (data antigua de Northwind)
 
-## 4. Aprendizajes clave
-- **Paginación con metadata**: `PagedResult<T>` es un patrón profesional para APIs paginadas (incluye TotalCount, TotalPages, HasNext/Previous).
-- **Union vs Concat en EF Core**: `Union` elimina duplicados pero no funciona después de proyecciones complejas; `Concat` es más flexible.
-- **Expresiones compiladas**: `EF.CompileQuery()` compila el árbol de expresión una sola vez y lo reutiliza, mejorando rendimiento en queries repetitivas. **Importante**: Todos los operadores LINQ deben estar dentro de la expresión compilada.
-- **ToQueryString()**: Muy útil para debugging y documentación de SQL generado por EF Core.
+## 3. Dificultades (Punto 2)
+- **Ciclo de dependencias circular**: 
+  - Inicialmente puse las specifications en `Domain`, que referenció a `Data` para usar las entidades.
+  - Pero `Data` ya referenciaba a `Domain` para las interfaces.
+  - **Solución**: Mover las specifications concretas de `Domain.Specifications` a `Data.Specifications`. Domain solo contiene las interfaces y `BaseSpecification<T>`.
+- **Error en DI**: 
+  - `Repository<T>` inicialmente pedía `DbContext` genérico en el constructor.
+  - DI no podía resolver porque solo `NorthwindContext` estaba registrado.
+  - **Solución**: Cambiar el constructor para recibir `NorthwindContext` directamente.
+- **Arquitectura vs pragmatismo**:
+  - En Clean Architecture ideal, las entidades deberían estar en `Domain`, no en `Data`.
+  - Pero como ya teníamos el scaffold de EF Core en `Data.Models`, mover todo sería mucho trabajo.
+  - **Decisión**: Mantener entidades en Data y documentar esta limitación en el diario.
+
+## 4. Aprendizajes clave (Punto 2)
+- **Patrón Specification**: 
+  - Encapsula criterios de consulta reutilizables.
+  - Separa lógica de negocio (Domain) de infraestructura (Data).
+  - Permite componer queries complejas con criterios, ordenamiento, paginación e includes.
+- **Repositorio genérico**:
+  - `IRepository<T>` define métodos: `GetAsync(spec)`, `GetEntityAsync(spec)`, `CountAsync(spec)`, `AnyAsync(spec)`.
+  - La implementación usa `SpecificationEvaluator<T>` para construir el IQueryable.
+- **SpecificationEvaluator**:
+  - Respeta el orden crítico de operadores: **WHERE → ORDER BY → INCLUDE → PAGING**.
+  - `ApplyPaging` debe ir al final después de OrderBy, o SQL falla.
+- **SQL dinámico vs estático**:
+  - Las specifications generan SQL en **runtime** según parámetros.
+  - No tiene sentido documentar en `.sql` estático (a diferencia de Queries 1-8).
+  - La demostración en **consola interactiva** es la mejor forma de validar el patrón.
+- **Ventajas demostradas**:
+  - Reutilización (misma spec con diferentes parámetros)
+  - Testabilidad (specifications son POCOs sin EF Core)
+  - Composición (combinar criterios fácilmente)
+  - Mantenibilidad (lógica de consulta encapsulada)
+  - SQL eficiente (EF Core traduce correctamente)
 
 ## 5. Próximo paso
-- Implementar **Punto 2**: Refactor con **repositorio genérico** + **Specification pattern**.
-- Crear interfaces `IRepository<T>` y `ISpecification<T>`.
-- Refactorizar queries existentes para usar el nuevo patrón.
+- Implementar **Punto 3**: Tests con **xUnit + EF In-Memory** (≥80% cobertura).
+- Testear `Repository<T>` y specifications principales.
+- Generar reporte de cobertura de código.
 
-## 6. Tiempo invertido
-- Query 5 (paginación básica): 30 min
-- Query 6 (paginación avanzada + PagedResult): 45 min
-- Query 7 (Union/Concat): 40 min (incluye debugging del error de Union)
-- Query 8 (expresiones compiladas): 50 min (incluye corrección del error de Take)
-- Creación de DTOs adicionales: 20 min
-- Debugging y correcciones: 30 min
-- Documentación y commit: 15 min
-- **Total: 3 h 30 min**
-- 
+## 6. Tiempo invertido (Punto 2)
+- Diseño de interfaces (ISpecification, IRepository): 30 min
+- Implementación de BaseSpecification y Repository: 45 min
+- Implementación de SpecificationEvaluator: 30 min
+- Creación de 7 specifications concretas: 1 h
+- SpecificationQueryRunner (demostración): 40 min
+- Debugging ciclo de dependencias: 25 min
+- Debugging error de DI (DbContext): 15 min
+- Pruebas y validación completa: 20 min
+- Documentación y reflexión: 25 min
+- **Total: 4 h 30 min**

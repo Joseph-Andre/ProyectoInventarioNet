@@ -1,5 +1,7 @@
 <Solution>
-  <Folder Name="/docs/" />
+  <Folder Name="/docs/">
+    <File Path="diario-equipo.md" />
+  </Folder>
   <Folder Name="/src/">
     <Project Path="LinqAdvancedLab.Console/LinqAdvancedLab.Console.csproj" Id="210e1181-75be-46d9-a9ca-ad12f3f7b3e5" />
     <Project Path="LinqAdvancedLab.Data/LinqAdvancedLab.Data.csproj" Id="a9a945c3-60df-483d-9c6a-20b66e6d6346" />
