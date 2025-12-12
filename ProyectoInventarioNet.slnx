@@ -7,7 +7,6 @@
     <Project Path="LinqAdvancedLab.Data/LinqAdvancedLab.Data.csproj" Id="a9a945c3-60df-483d-9c6a-20b66e6d6346" />
     <Project Path="LinqAdvancedLab.Domain/LinqAdvancedLab.Domain.csproj" Id="5766d297-39e0-43c3-9e35-172304118774" />
   </Folder>
-  <Folder Name="/test/" />
   <Folder Name="/tests/">
     <Project Path="tests/LinqAdvancedLab.Tests/LinqAdvancedLab.Tests.csproj" />
   </Folder>
