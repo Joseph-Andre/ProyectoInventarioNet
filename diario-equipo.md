@@ -1,29 +1,57 @@
-﻿Markdown
+﻿# Diario de Aprendizaje – Equipo – Semana 10-11/12/2025
 
-# Diario de Aprendizaje – <Joseph> – Semana <10/12/2025>
-## 1. Objetivos del día
-- [X] Realizar modelado inicial (Scaffold + DTOs).
-- [X] Implementar consultas básicas (Queries 1–4).
-- [X]  Generar SQL con ToQueryString() para documentación.
-- [X]  Realizar PRs hacia la rama develop.
-## 2. Lo que logré
--Realicé Scaffold del Northwind, generé los DTOs y confirmé cambios con el commit “feat: scaffold + DTOs”.
--Completé las Queries 1–4 del laboratorio y generé los archivos SQL en docs/query1.sql.
--Realicé Push + Pull Request a develop y el PR fue aprobado por otro equipo (code review).
--Moví la tarjeta “Modelado” de Doing → Done en el tablero del proyecto.
-## 3. Dificultades
--El proceso de organizar los archivos generados por el Scaffold tomó más tiempo de lo esperado.
--Tuve inconvenientes al crear algunos archivos y ubicarlos dentro de la estructura correcta del proyecto.
-- También surgieron problemas al ejecutar los comandos de migración, ya que varios requerían ajustes en el contexto y rutas antes de funcionar correctamente.
+## 👨‍💻 Carlos Garces – Día 10/12/2025
+
+### 1. Objetivos del día
+- [X] Realizar modelado inicial (Scaffold de Northwind).
+- [X] Implementar consultas básicas (Queries 1–2).
+- [X] Generar SQL con ToQueryString() para documentación.
+
+### 2. Lo que logré
+- Realicé Scaffold del Northwind y configuré el contexto de base de datos.
+- Completé las Queries 1–2 del laboratorio y generé los archivos SQL en `docs/query1.sql`.
+- Realicé Push + Pull Request a develop.
+
+### 3. Dificultades
+- El proceso de organizar los archivos generados por el Scaffold tomó más tiempo de lo esperado.
+- Tuve inconvenientes al ejecutar los comandos de migración, varios requerían ajustes en el contexto y rutas.
+
+### 4. Próximo paso
+- Continuar con las Queries avanzadas (5-6).
+
+### 5. Tiempo invertido
+- Modelado: 1.5 h
+- Consultas básicas (Queries 1–2): 1 h
+- **Total: 2.5 h**
+
+---
+
+## 👨‍💻 Joseph Sanchez – Día 10/12/2025
+
+### 1. Objetivos del día
+- [X] Generar los DTOs del proyecto.
+- [X] Implementar consultas básicas (Queries 3–4).
+- [X] Realizar PRs hacia la rama develop.
+
+### 2. Lo que logré
+- Generé los DTOs y confirmé cambios con el commit "feat: scaffold + DTOs".
+- Completé las Queries 3–4 del laboratorio con sus respectivos archivos SQL.
+- El PR fue aprobado por otro equipo (code review).
+- Moví la tarjeta "Modelado" de Doing → Done en el tablero del proyecto.
+
+### 3. Dificultades
+- Tuve inconvenientes al crear algunos archivos y ubicarlos dentro de la estructura correcta del proyecto.
 - Ajustar los DTOs requirió revisar nombres y mapeos para evitar inconsistencias.
-## 4. Próximo paso
--Avanzar con las Queries 5–8 (paginación, unión y consultas compiladas).
-## 5. Tiempo invertido
--Modelado: 2 h
--Consultas básicas (Queries 1–4): 2 h
--Total: 4 h
 
-# Diario de Aprendizaje – <Joseph> – Semana <11/12/2025> (continuación)
+### 4. Próximo paso
+- Avanzar con las Queries 7–8 (paginación y consultas compiladas).
+
+### 5. Tiempo invertido
+- DTOs: 0.5 h
+- Consultas básicas (Queries 3–4): 1 h
+- **Total: 1.5 h**
+
+# Diario de Aprendizaje – <Joseph> – Semana <11/12/2025> 
 ## 1. Objetivos del día (Punto 2: Repository + Specification)
 - [X] Crear rama feature/repository-specification.
 - [X] Diseñar interfaces `ISpecification<T>` e `IRepository<T>` en Domain.
@@ -229,3 +257,103 @@
 - `tests/LinqAdvancedLab.Tests/` - 18 tests unitarios
 - `TestResults/CoverageReport/index.html` - Reporte de cobertura
 - `diario-equipo.md` - Documentación completa del proceso
+
+
+## 👨‍💻 Carlos Garces – Día 12/12/2025 (Documentación Final)
+
+### 1. Objetivos del día
+- [X] Completar formulario de autoevaluación del equipo.
+- [X] Colaborar en la creación del video de presentación (2 minutos).
+
+### 2. Lo que logré
+- **Formulario de autoevaluación**:
+  - Completé el formulario de autoevaluación evaluando el desempeño del equipo.
+  - Documenté las fortalezas, áreas de mejora y lecciones aprendidas del proyecto.
+  - Evalué la contribución individual y colaborativa en cada fase del laboratorio.
+- **Video de presentación** (en conjunto con Joseph):
+  - Grabamos video de 2 minutos demostrando:
+    - Arquitectura del proyecto (Domain, Data, Tests)
+    - Ejecución de Queries 1-8
+    - Patrón Repository + Specification en acción
+    - Resultados de tests unitarios (18 tests, 100% pasando)
+    - Reporte de cobertura (92.8% branch coverage)
+
+### 3. Dificultades
+- **Coordinación para la grabación**:
+  - Sincronizar horarios para la grabación del video.
+  - Ajustar el contenido para que quepa en 2 minutos sin perder información clave.
+
+### 4. Aprendizajes clave
+- **Autoevaluación efectiva**: Reflexionar sobre el proceso ayuda a identificar mejoras para futuros proyectos.
+- **Comunicación visual**: Un video corto y conciso es más efectivo que documentación extensa para demos.
+
+### 5. Tiempo invertido
+- Formulario de autoevaluación: 45 min
+- Preparación y grabación del video: 1 h 15 min
+- **Total: 2 h**
+
+---
+
+## 👨‍💻 Joseph Sanchez – Día 12/12/2025 (Documentación Final)
+
+### 1. Objetivos del día
+- [X] Consolidar diarios individuales en PDF unificado.
+- [X] Colaborar en la creación del video de presentación (2 minutos).
+
+### 2. Lo que logré
+- **Diarios combinados en PDF**:
+  - Recopilé todos los diarios de aprendizaje del equipo (10/12, 11/12, 12/12).
+  - Generé documento PDF profesional: `docs/diarios-equipo.pdf`
+  - Incluí:
+    - Portada con nombre del equipo e integrantes
+    - Índice con enlaces a cada sección
+    - Formato consistente y legible
+    - Resumen de logros y estadísticas del equipo
+- **Video de presentación** (en conjunto con Carlos):
+  - Participé en la grabación del video de 2 minutos.
+  - Me enfoqué en demostrar:
+    - Specifications concretas y su reutilización
+    - Ejecución de SpecificationQueryRunner
+    - Resultados del reporte de cobertura
+
+### 3. Dificultades
+- **Formato del PDF**:
+  - Asegurar que el formato Markdown se convirtiera correctamente a PDF.
+  - Mantener la legibilidad de los bloques de código y tablas.
+
+### 4. Aprendizajes clave
+- **Documentación como entregable**: Un PDF bien estructurado facilita la evaluación y revisión del proyecto.
+- **Trabajo en equipo**: La colaboración en el video reforzó la comprensión compartida del proyecto.
+
+### 5. Tiempo invertido
+- Consolidación de diarios: 30 min
+- Generación del PDF: 45 min
+- Preparación y grabación del video: 1 h 15 min
+- **Total: 2 h 30 min**
+
+---
+
+## 📊 Resumen del Equipo
+
+### 📦 Entregables generados:
+- `docs/query1.sql` - Queries 1-4 básicas
+- `docs/queries_5_to_8.sql` - Queries 5-8 avanzadas
+- `tests/LinqAdvancedLab.Tests/` - 18 tests unitarios (100% pasando)
+- `TestResults/CoverageReport/index.html` - Reporte de cobertura (92.8% branch coverage)
+- `docs/diarios-equipo.pdf` - Documentación completa del proceso
+- `video-presentacion.mp4` - Video demo de 2 minutos
+
+### ⏱️ Tiempo total invertido:
+- **Carlos Garces**: 6 h 55 min (10/12: 2.5h + 11/12: 2.25h + 12/12: 2h)
+- **Joseph Sanchez**: 8 h (10/12: 1.5h + 11/12: 4.5h + 12/12: 2.5h)
+- **Total equipo**: 14 h 55 min
+
+### 🎯 Logros destacados del proyecto:
+- ✅ **100% de tests pasando** (18/18 tests unitarios)
+- ✅ **92.8% branch coverage** (supera el 80% requerido)
+- ✅ **Arquitectura limpia** implementada (Domain → Data → Tests)
+- ✅ **Patrón Specification** correctamente aplicado con 7 specifications
+- ✅ **Patrón Repository** genérico con inyección de dependencias
+- ✅ **Documentación completa** en PDF y diarios detallados
+- ✅ **Colaboración efectiva** entre ambos desarrolladores
+- ✅ **Video de presentación** profesional de 2 minutos
