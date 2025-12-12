@@ -51,7 +51,7 @@
 - Consultas básicas (Queries 3–4): 1 h
 - **Total: 1.5 h**
 
-# Diario de Aprendizaje – <Joseph> – Semana <11/12/2025> 
+# Diario de Aprendizaje – Joseph Sanchez – Semana <11/12/2025> 
 ## 1. Objetivos del día (Punto 2: Repository + Specification)
 - [X] Crear rama feature/repository-specification.
 - [X] Diseñar interfaces `ISpecification<T>` e `IRepository<T>` en Domain.
@@ -143,7 +143,7 @@
 
 ---
 
-# Diario de Aprendizaje – <Joseph> – Semana <11/12/2025> (continuación)
+# Diario de Aprendizaje – Joseph Sanchez – Semana <11/12/2025> (continuación)
 ## 1. Objetivos del día (Punto 3: Tests xUnit + EF In-Memory)
 - [X] Crear proyecto de tests LinqAdvancedLab.Tests en carpeta tests/.
 - [X] Configurar EF Core In-Memory Database.
