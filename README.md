@@ -3,8 +3,9 @@
 ## 📂 Entregables Finales
 
 Todo el material solicitado (video demo y diarios combinados en PDF) se encuentra en la siguiente carpeta de Google Drive:
-
 🔗 **Carpeta de entregables: https://drive.google.com/drive/folders/1WdVzjeESo-Iy9VWXxn2yQQ0OoNjlwgBA?usp=sharing
+
+🔗 **Trello Tablero de trabajo: https://trello.com/b/1vXQv88Z/mi-tablero-de-trello
 
 PASOS PARA EJECUTAR LSO QUERY DE 1 AL 4 Y DEL 5 AL 8
 ENTRAR EN LA TERMINAL DE :
