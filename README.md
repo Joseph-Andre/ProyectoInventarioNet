@@ -25,10 +25,13 @@ ENTRAR A TERMINAL DE :
 PS C:\Users\PC\source\repos\Joseph-Andre\ProyectoInventarioNet\tests\LinqAdvancedLab.Tests>
 
 Paso 2: Ejecutar todos los tests 🧪
+------------------
 cd tests\LinqAdvancedLab.Tests
+------------------------------
 dotnet test --verbosity normal EJECUTA TODOS LOS TEST
 -------------
 Paso 3: Generar reporte de cobertura (≥80%) 📊
+-----------------------
 dotnet test --collect:"XPlat Code Coverage"
 --------------
 Para ver el reporte en HTML, instala ReportGenerator:
