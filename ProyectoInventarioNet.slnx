@@ -8,5 +8,8 @@
     <Project Path="LinqAdvancedLab.Domain/LinqAdvancedLab.Domain.csproj" Id="5766d297-39e0-43c3-9e35-172304118774" />
   </Folder>
   <Folder Name="/test/" />
+  <Folder Name="/tests/">
+    <Project Path="tests/LinqAdvancedLab.Tests/LinqAdvancedLab.Tests.csproj" />
+  </Folder>
   <Project Path="ProyectoInventarioNet/ProyectoInventarioNet.csproj" />
 </Solution>
